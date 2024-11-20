@@ -13,10 +13,11 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
-    private val _userListFlow = MutableStateFlow<APIResponse<List<String>>>(APIResponse.Empty())
+    private val _userListFlow = MutableStateFlow<APIResponse<List<String>>>(APIResponse.Success(emptyList()))
     val userListFlow: StateFlow<APIResponse<List<String>>> = _userListFlow
 
-    private val userStaticList: MutableList<String> = mutableListOf()
+    private val userStaticList = mutableListOf<String>()
+    private var counter = 1
 
     fun getUserList() {
         viewModelScope.launch {
@@ -26,11 +27,8 @@ class UserViewModel @Inject constructor(private val userRepository: UserReposito
         }
     }
 
-    private var counter = 1
-
     fun addItem() {
         userStaticList.add("Item ${counter++}")
-        _userListFlow.value = APIResponse.Success(userStaticList)
+        _userListFlow.value = APIResponse.Success(userStaticList.toList())
     }
-
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.alpharays.composeclean.utils.APIResponse
 
 @Composable
 fun UserListStaticScreen(
@@ -66,9 +67,16 @@ fun UserListStaticScreen(
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
-                    LazyColumn {
-                        items(items.value.data?.take(20) ?: emptyList()) { item ->
-                            ListItemStatic(item)
+                    when (items.value) {
+                        is APIResponse.Success -> {
+                            LazyColumn {
+                                items((items.value as APIResponse.Success<List<String>>).data?.take(20) ?: emptyList()) { item ->
+                                    ListItemStatic(item)
+                                }
+                            }
+                        }
+                        else -> {
+                            // Handle other states if needed
                         }
                     }
                 }
@@ -92,11 +100,17 @@ fun UserListStaticScreen(
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.padding(bottom = 8.dp)
                     )
-                }
-                LazyColumn {
-                    val overflowItems = items.value.data?.drop(20) ?: emptyList()
-                    items(overflowItems) { item ->
-                        ListItemStatic(item)
+                    when (items.value) {
+                        is APIResponse.Success -> {
+                            LazyColumn {
+                                items((items.value as APIResponse.Success<List<String>>).data?.drop(20) ?: emptyList()) { item ->
+                                    ListItemStatic(item)
+                                }
+                            }
+                        }
+                        else -> {
+                            // Handle other states if needed
+                        }
                     }
                 }
             }
