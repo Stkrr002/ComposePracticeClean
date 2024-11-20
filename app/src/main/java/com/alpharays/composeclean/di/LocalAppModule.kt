@@ -1,5 +1,6 @@
 package com.alpharays.composeclean.di
 
+import com.alpharays.composeclean.data.ApiServices
 import com.alpharays.composeclean.utils.AuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -14,6 +15,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class LocalAppModule {
+
+    @Singleton
+    @Provides
+    fun providesApiServices(
+        retrofit: Retrofit.Builder,
+        okHttpClient: OkHttpClient
+    ): ApiServices {
+        return retrofit.client(okHttpClient).build().create(ApiServices::class.java)
+    }
 
     @Singleton
     @Provides
