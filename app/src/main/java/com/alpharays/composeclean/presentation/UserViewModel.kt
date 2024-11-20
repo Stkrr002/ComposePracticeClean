@@ -16,12 +16,21 @@ class UserViewModel @Inject constructor(private val userRepository: UserReposito
     private val _userListFlow = MutableStateFlow<APIResponse<List<String>>>(APIResponse.Empty())
     val userListFlow: StateFlow<APIResponse<List<String>>> = _userListFlow
 
+    private val userStaticList: MutableList<String> = mutableListOf()
+
     fun getUserList() {
         viewModelScope.launch {
             userRepository.getUserList().collect {
                 _userListFlow.value = it
             }
         }
+    }
+
+    private var counter = 1
+
+    fun addItem() {
+        userStaticList.add("Item ${counter++}")
+        _userListFlow.value = APIResponse.Success(userStaticList)
     }
 
 }

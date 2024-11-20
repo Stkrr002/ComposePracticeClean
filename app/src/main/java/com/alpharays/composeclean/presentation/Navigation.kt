@@ -10,9 +10,11 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = NavigationConstants.DeepLinks.USER_LIST_SCREEN
+        startDestination = "user_list_screen_static"
     ) {
         composable(NavigationConstants.DeepLinks.USER_LIST_SCREEN) { UserListScreen(navController) }
+        composable("user_list_screen_static") { UserListStaticScreen(navController) }
+
         /*
         composable("${NavigationConstants.DeepLinks.VERIFY_OTP}/{${NavigationConstants.VERIFICATION_ID}}/{${NavigationConstants.MOBILE_NUMBER}}") { backStackEntry ->
             VerifyOtpScreen(
