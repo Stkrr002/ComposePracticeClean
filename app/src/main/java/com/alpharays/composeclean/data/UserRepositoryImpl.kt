@@ -14,6 +14,6 @@ class UserRepositoryImpl @Inject constructor(private val apiServices: ApiService
     override suspend fun getUserList(): Flow<APIResponse<List<String>>> =
 
         responseHandler.callAPI {
-            apiServices.getUserList("")
+            apiServices.getUserList()
         }
 }

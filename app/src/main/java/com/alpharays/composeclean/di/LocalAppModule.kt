@@ -28,7 +28,7 @@ class LocalAppModule {
     @Singleton
     @Provides
     fun providesRetrofit(): Retrofit.Builder {
-        return Retrofit.Builder().baseUrl("baseUrl")
+        return Retrofit.Builder().baseUrl("http://demo3272470.mockable.io")
             .addConverterFactory(GsonConverterFactory.create())
     }
 

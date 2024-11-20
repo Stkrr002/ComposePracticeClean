@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Url
 
 interface ApiServices {
-    @GET
-    suspend fun getUserList(@Url listUrl: String): Response<List<String>>
+    @GET("/userlist")
+    suspend fun getUserList(): Response<List<String>>
 }
