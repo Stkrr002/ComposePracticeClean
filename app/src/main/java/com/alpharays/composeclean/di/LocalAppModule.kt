@@ -1,10 +1,14 @@
 package com.alpharays.composeclean.di
 
+import android.content.Context
+import androidx.room.Room
+import com.alpharays.composeclean.data.local.StudentDataBase
 import com.alpharays.composeclean.data.remote.ApiServices
 import com.alpharays.composeclean.utils.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -42,5 +46,13 @@ class LocalAppModule {
         val builder =
             OkHttpClient.Builder().addInterceptor(interceptor).addInterceptor(loggingInterceptor)
         return builder.build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): StudentDataBase {
+        return Room.databaseBuilder(context,
+            StudentDataBase::class.java, "my-swipe-product-room-db")
+            .build()
     }
 }
