@@ -70,7 +70,7 @@ fun UserListStaticScreen(
                     when (items.value) {
                         is APIResponse.Success -> {
                             LazyColumn {
-                                items((items.value as APIResponse.Success<List<String>>).data?.take(20) ?: emptyList()) { item ->
+                                items((items.value).data?.take(20) ?: emptyList()) { item ->
                                     ListItemStatic(item)
                                 }
                             }
