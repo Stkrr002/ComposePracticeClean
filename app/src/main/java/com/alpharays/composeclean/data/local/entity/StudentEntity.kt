@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class StudentEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
-    val rollNumber: String,
+    val rollNumber: Int,
 )
