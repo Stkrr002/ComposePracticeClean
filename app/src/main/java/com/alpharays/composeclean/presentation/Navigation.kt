@@ -10,7 +10,7 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "user_list_screen_static"
+        startDestination = NavigationConstants.DeepLinks.USER_LIST_SCREEN
     ) {
         composable(NavigationConstants.DeepLinks.USER_LIST_SCREEN) { UserListScreen(navController) }
         composable("user_list_screen_static") { UserListStaticScreen(navController) }

@@ -29,93 +29,93 @@ fun UserListStaticScreen(
     userViewModel: UserViewModel = hiltViewModel()
 ) {
     // State to hold the list items
-    val items = userViewModel.userListFlow.collectAsState()
-
-    Scaffold(
-        bottomBar = {
-            Button(
-                onClick = { userViewModel.addItem() },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Text("Add Item")
-            }
-        }
-    ) { paddingValues ->
-        Row(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            // Left List
-            Card(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp)
-                    .fillMaxHeight(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxSize()
-                ) {
-                    Text(
-                        text = "Left List (First 20 items)",
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    when (items.value) {
-                        is APIResponse.Success -> {
-                            LazyColumn {
-                                items((items.value).data?.take(20) ?: emptyList()) { item ->
-                                    ListItemStatic(item)
-                                }
-                            }
-                        }
-                        else -> {
-                            // Handle other states if needed
-                        }
-                    }
-                }
-            }
-
-            // Right List
-            Card(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(8.dp)
-                    .fillMaxHeight(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxSize()
-                ) {
-                    Text(
-                        text = "Right List (Overflow items)",
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    )
-                    when (items.value) {
-                        is APIResponse.Success -> {
-                            LazyColumn {
-                                items((items.value as APIResponse.Success<List<String>>).data?.drop(20) ?: emptyList()) { item ->
-                                    ListItemStatic(item)
-                                }
-                            }
-                        }
-                        else -> {
-                            // Handle other states if needed
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    val items = userViewModel.userListFlow.collectAsState()
+//
+//    Scaffold(
+//        bottomBar = {
+//            Button(
+//                onClick = { userViewModel.addItem() },
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(16.dp)
+//            ) {
+//                Text("Add Item")
+//            }
+//        }
+//    ) { paddingValues ->
+//        Row(
+//            modifier = Modifier
+//                .padding(paddingValues)
+//                .fillMaxSize(),
+//            horizontalArrangement = Arrangement.SpaceEvenly
+//        ) {
+//            // Left List
+//            Card(
+//                modifier = Modifier
+//                    .weight(1f)
+//                    .padding(8.dp)
+//                    .fillMaxHeight(),
+//                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+//            ) {
+//                Column(
+//                    modifier = Modifier
+//                        .padding(16.dp)
+//                        .fillMaxSize()
+//                ) {
+//                    Text(
+//                        text = "Left List (First 20 items)",
+//                        style = MaterialTheme.typography.titleMedium,
+//                        modifier = Modifier.padding(bottom = 8.dp)
+//                    )
+//                    when (items.value) {
+//                        is APIResponse.Success -> {
+//                            LazyColumn {
+//                                items((items.value).data?.take(20) ?: emptyList()) { item ->
+//                                    ListItemStatic(item)
+//                                }
+//                            }
+//                        }
+//                        else -> {
+//                            // Handle other states if needed
+//                        }
+//                    }
+//                }
+//            }
+//
+//            // Right List
+//            Card(
+//                modifier = Modifier
+//                    .weight(1f)
+//                    .padding(8.dp)
+//                    .fillMaxHeight(),
+//                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+//            ) {
+//                Column(
+//                    modifier = Modifier
+//                        .padding(16.dp)
+//                        .fillMaxSize()
+//                ) {
+//                    Text(
+//                        text = "Right List (Overflow items)",
+//                        style = MaterialTheme.typography.titleMedium,
+//                        modifier = Modifier.padding(bottom = 8.dp)
+//                    )
+//                    when (items.value) {
+//                        is APIResponse.Success -> {
+//                            LazyColumn {
+//                                items((items.value as APIResponse.Success<List<String>>).data?.drop(20) ?: emptyList()) { item ->
+//                                    ListItemStatic(item)
+//                                }
+//                            }
+//                        }
+//                        else -> {
+//                            // Handle other states if needed
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 
