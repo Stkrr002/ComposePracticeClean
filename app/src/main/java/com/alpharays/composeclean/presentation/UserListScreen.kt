@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -76,7 +77,18 @@ fun UserListScreen(
         userViewModel.getUserList()
     }
 
-    Scaffold { paddingValues ->
+    Scaffold(
+        bottomBar = {
+            Button(
+                onClick = { userViewModel.addItem() },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text("Add Item")
+            }
+        }
+    ) { paddingValues ->
         Row(
             modifier = Modifier
                 .padding(paddingValues)

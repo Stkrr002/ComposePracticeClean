@@ -51,8 +51,15 @@ class LocalAppModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): StudentDataBase {
-        return Room.databaseBuilder(context,
-            StudentDataBase::class.java, "my-swipe-product-room-db")
+        return Room.databaseBuilder(
+            context,
+            StudentDataBase::class.java, "my-swipe-product-room-db"
+        )
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideStudentDao(appDatabase: StudentDataBase) = appDatabase.studentDao()
+
 }

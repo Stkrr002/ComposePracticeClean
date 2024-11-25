@@ -3,9 +3,11 @@ package com.alpharays.composeclean.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alpharays.composeclean.domain.UserRepository
+import com.alpharays.composeclean.domain.model.Student
 import com.alpharays.composeclean.domain.model.StudentListResponse
 import com.alpharays.composeclean.utils.APIResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -30,7 +32,17 @@ class UserViewModel @Inject constructor(private val userRepository: UserReposito
     }
 
     fun addItem() {
-//        userStaticList.add("Item ${counter++}")
-//        _userListFlow.value = APIResponse.Success(userStaticList.toList())
+        viewModelScope.launch(Dispatchers.IO) {
+            counter++
+
+            userRepository.addUserToList(
+                Student(
+                    name = "Sumit $counter", roll_number = counter
+                )
+            ).collect {
+                _userListFlow.value = it
+            }
+        }
+
     }
 }
