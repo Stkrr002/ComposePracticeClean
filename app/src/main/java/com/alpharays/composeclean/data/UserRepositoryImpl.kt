@@ -1,7 +1,7 @@
 package com.alpharays.composeclean.data
 
-import com.alpharays.composeclean.data.dto.StudentListResponseDto
 import com.alpharays.composeclean.data.mapper.toStudentResponse
+import com.alpharays.composeclean.data.remote.ApiServices
 import com.alpharays.composeclean.domain.UserRepository
 import com.alpharays.composeclean.domain.model.StudentListResponse
 import com.alpharays.composeclean.utils.APIResponse

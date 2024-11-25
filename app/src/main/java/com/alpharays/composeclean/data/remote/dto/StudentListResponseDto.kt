@@ -1,4 +1,4 @@
-package com.alpharays.composeclean.data.dto
+package com.alpharays.composeclean.data.remote.dto
 
 data class StudentListResponseDto(
     val students: List<StudentDto?>?

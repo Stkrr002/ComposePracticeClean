@@ -1,6 +1,6 @@
 package com.alpharays.composeclean.di
 
-import com.alpharays.composeclean.data.ApiServices
+import com.alpharays.composeclean.data.remote.ApiServices
 import com.alpharays.composeclean.utils.AuthInterceptor
 import dagger.Module
 import dagger.Provides
