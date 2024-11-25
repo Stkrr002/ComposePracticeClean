@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.alpharays.composeclean.domain.model.Student
+import com.alpharays.composeclean.domain.model.StudentListResponse
 import com.alpharays.composeclean.utils.APIResponse
 
 @Composable
@@ -33,8 +35,8 @@ fun UserListScreen(
     userViewModel: UserViewModel = hiltViewModel()
 ) {
     // State to hold left and right lists
-    var leftList by remember { mutableStateOf<List<String>>(emptyList()) }
-    var rightList by remember { mutableStateOf<List<String>>(emptyList()) }
+    var leftList by remember { mutableStateOf<List<Student?>>(emptyList()) }
+    var rightList by remember { mutableStateOf<List<Student?>>(emptyList()) }
 
     // Collect the API response
     val userListState = userViewModel.userListFlow.collectAsState()
@@ -43,7 +45,7 @@ fun UserListScreen(
     LaunchedEffect(userListState.value) {
         when (val response = userListState.value) {
             is APIResponse.Success -> {
-                response.data?.let { fullList ->
+                response.data?.students?.let { fullList ->
                     if (fullList.size <= 20) {
                         leftList = fullList
                         rightList = emptyList()
@@ -137,7 +139,7 @@ fun UserListScreen(
 }
 
 @Composable
-private fun ListItem(item: String) {
+private fun ListItem(item: Student?) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -145,7 +147,7 @@ private fun ListItem(item: String) {
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Text(
-            text = item,
+            text = item?.name ?: "",
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()

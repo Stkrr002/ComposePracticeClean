@@ -30,7 +30,7 @@ class UserViewModel @Inject constructor(private val userRepository: UserReposito
     }
 
     fun addItem() {
-        userStaticList.add("Item ${counter++}")
-        _userListFlow.value = APIResponse.Success(userStaticList.toList())
+//        userStaticList.add("Item ${counter++}")
+//        _userListFlow.value = APIResponse.Success(userStaticList.toList())
     }
 }
